@@ -23,8 +23,8 @@
             <input type="text" class="form-control" id="last_name" name="last_name">
         </div>
         <div class="col-md-3">
-            <label for="suffix" class="form-label">Suffix</label>
-            <input type="text" class="form-control" id="suffix" name="suffix">
+            <label for="suffix_name" class="form-label">Suffix</label>
+            <input type="text" class="form-control" id="suffix_name" name="suffix_name">
         </div>
         <div class="col-md">
             <label for="birth_date" class="form-label">Birth Date</label>
@@ -49,8 +49,8 @@
             <input type="text" class="form-control" id="contact_num" name="contact_num">
         </div>
         <div class="col-md">
-            <label for="emailAddress" class="form-label">Email Address</label>
-            <input type="text" class="form-control" id="emailAddress" name="emailAddress">
+            <label for="email_address" class="form-label">Email Address</label>
+            <input type="text" class="form-control" id="email_address" name="email_address">
         </div>
         <div class="col-md-">
             <label for="username" class="form-label">Username</label>

@@ -12,6 +12,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/add">Add User</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/gender/index">Gender</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/gender/create">Add Gender</a>
+        </li>
       </ul>
     </div>
   </div>
