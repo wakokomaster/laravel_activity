@@ -27,8 +27,8 @@
         <td>Date</td>
         <td>Date </td>
         <td>
-        <a href="/edit" class="btn btn-primary">Update</a>
-        <a href="/delete" class="btn btn-danger">Delete</a>
+        <a href="/gender/edit" class="btn btn-primary">Update</a>
+        <a href="/gender/delete" class="btn btn-danger">Delete</a>
         </td>
       </tr>
     </tbody>

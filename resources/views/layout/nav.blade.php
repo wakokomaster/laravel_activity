@@ -16,7 +16,7 @@
           <a class="nav-link" href="/gender/index">Gender</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/gender/create">Add Gender</a>
+          <a class="nav-link" href="/gender/add">Add Gender</a>
         </li>
       </ul>
     </div>

@@ -37,3 +37,18 @@ Route::get('/gender/index', function () {
     return view('gender.index');
 });
 
+Route::get('/gender/add', function () {
+    return view('gender.create');
+});
+
+Route::get('/gender/edit', function () {
+    return view('gender.edit');
+});
+
+Route::get('/gender/delete', function () {
+    return view('gender.delete');
+});
+
+
+
+
