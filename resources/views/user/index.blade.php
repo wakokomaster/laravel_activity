@@ -34,8 +34,8 @@
         <td>Male</td>
         <td>mretuma@gmail.com</td>
         <td>
-        <a href="/edit" class="btn btn-primary">Update</a>
-        <a href="/delete" class="btn btn-danger">Delete</a>
+        <a href="/user/edit" class="btn btn-primary">Update</a>
+        <a href="/user/delete" class="btn btn-danger">Delete</a>
         </td>
       </tr>
     </tbody>

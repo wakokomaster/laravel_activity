@@ -40,15 +40,15 @@
                 <option value="3">Others</option>
             </select>
         </div>
-        <div class="col-md">
+        <div class="col-md-5">
             <label for="address" class="form-label">Address</label>
             <input type="text" class="form-control" id="address" name="address">
         </div>
-        <div class="col-md">
+        <div class="col-md-6">
             <label for="contact_num" class="form-label">Contact Number</label>
             <input type="text" class="form-control" id="contact_num" name="contact_num">
         </div>
-        <div class="col-md">
+        <div class="col-md-6">
             <label for="emailAddress" class="form-label">Email Address</label>
             <input type="text" class="form-control" id="emailAddress" name="emailAddress">
         </div>
