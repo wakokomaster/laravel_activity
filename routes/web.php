@@ -18,7 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/gender/create', [GenderController::class,'create']);
+Route::get('/gender/show/{id}', [GenderController::class,'show']);
 Route::get('/gender', [GenderController::class,'index']);
+Route::get('/gender/edit/{id}', [GenderController::class,'edit']);
+
+Route::post('/gender/store', [GenderController::class,'store']);
+Route::put('/gender/update/{gender}', [GenderController::class,'update']);
 
 
 
