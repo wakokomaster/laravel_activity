@@ -34,7 +34,7 @@
                     <div class="btn-group">
                         <a href="/gender/show/{{$gender->gender_id}}" class="btn btn-primary">View</a>
                         <a href="/gender/edit/{{$gender->gender_id}}" class="btn btn-warning">Update</a>
-                        <a href="/gender/delete" class="btn btn-danger">Delete</a>
+                        <a href="/gender/delete/{{$gender->gender_id}}" class="btn btn-danger">Delete</a>
                     </div>
                 </td>
             </tr>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GenderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +19,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/gender/create', [GenderController::class,'create']);
-Route::get('/gender/show/{id}', [GenderController::class,'show']);
-Route::get('/gender', [GenderController::class,'index']);
-Route::get('/gender/edit/{id}', [GenderController::class,'edit']);
+Route::controller(GenderController::class)->group(function () {
+    Route::get('/gender/create', 'create');
+    Route::get('/gender/show/{id}', 'show');
+    Route::get('/gender', 'index');
+    Route::get('/gender/edit/{id}', 'edit');
+    Route::get('/gender/delete/{id}', 'delete');
 
-Route::post('/gender/store', [GenderController::class,'store']);
-Route::put('/gender/update/{gender}', [GenderController::class,'update']);
+    Route::post('/gender/store', 'store');
+    Route::put('/gender/update/{gender}', 'update');
+    Route::delete('/gender/destroy/{gender}', 'destroy');
+});
 
-
-
-
+Route::controller(UserController::class)->group(function () {
+    Route::get('/user/create','create');
+    
+});

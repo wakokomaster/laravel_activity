@@ -42,19 +42,23 @@ class GenderController extends Controller
 
     public function update(Request $request, Gender $gender)
     {
-        $validated= $request->validate([
+        $validated = $request->validate([
             'gender' => ['required'],
         ]);
 
         $gender->update($validated);
 
-        return redirect('gender')->with('message_success','Gender Successfully Updated!');
+        return redirect('gender')->with('message_success', 'Gender Successfully Updated!');
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $gender = Gender::find($id);
+        return view('gender.delete', compact('gender'));
     }
-    public function destroy()
+    public function destroy(Request $request, Gender $gender)
     {
+     $gender->delete($request);
+     return redirect('gender')->with('message_success','Gender Deleted Successfully!');
     }
 }

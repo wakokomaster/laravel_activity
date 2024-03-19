@@ -10,7 +10,7 @@
           <a class="nav-link active" aria-current="page" href="/user">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/user/add">Add User</a>
+          <a class="nav-link" href="/user/create">Add User</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/gender">Gender</a>
