@@ -10,25 +10,11 @@
     .title {
         padding-bottom: 20px
     }
-
-    .button {
-    display: flex;
-    justify-content: center;
-
-    .btn{
-        padding-left: 7%;
-        padding-right: 7%;
-        margin-left: 2%;
-        margin-right: 2%;
-    }
-}
-
 </style>
 
 <div class='container'>
-    <h2 class="title"> Are you sure you want to Delete User: #{{$user->user_id}}</h2>
-    <form class="row g-4" action="/user/destroy/{{$user->user_id}}" method="POST">
-        @method('DELETE')
+    <h2 class="title">View User <b>#{{$user->user_id}}</b></h2>
+    <form class="row g-4" action="#" method="POST">
         @csrf
         {{-- First Name --}}
         <div class="col-md-">
@@ -66,9 +52,8 @@
         </div>
 
         {{-- Buttons --}}
-        <div class="col-12 button">
-            <a href="/user" class="btn btn-primary">BACK</a>
-            <button type="submit" class="btn btn-danger">DELETE</button>
+        <div class="col-12">
+            <a href="/user" class="btn btn-danger">Back</a>
 
         </div>
     </form>

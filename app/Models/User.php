@@ -23,12 +23,16 @@ class User extends Authenticatable
         "birth_date",
         "gender_id",
         "address",
-        "contact_number",
+        "contact_num",
         "email_address",
         "username",
         "email",
         "password",
     ];
 
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class, 'gender_id');
+    }
     protected $hidden = ['password'];
 }

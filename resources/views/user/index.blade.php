@@ -3,18 +3,35 @@
 @section('content')
 
 
-<div class="container">
+<style>
+  .container {
+    padding-top: 2%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-top: 2%;
+  }
 
-  <style>
-    .container {
-      padding-top: 2%;
-    }
-  </style>
+  .btn {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+</style>
+
+
+<div class="container">
+  <h1>List of Users</h1>
+
+  <div>
+
+    @include('include.messages')
+  </div>
 
   <table class="table table-responsive">
+    <div>
+      <a href="/user/create" class="btn btn-primary float-end">Add User</a>
+    </div>
     <thead>
       <tr>
-        <th scope="col">ID#</th>
         <th scope="col">First Name</th>
         <th scope="col">Middle Name</th>
         <th scope="col">Last Name</th>
@@ -25,19 +42,21 @@
       </tr>
     </thead>
     <tbody>
+      @foreach ($users as $user)
       <tr>
-        <th scope="row">1</th>
-        <td>Martin</td>
-        <td>Alicaya</td>
-        <td>Retuma</td>
-        <td>Roxas City</td>
-        <td>Male</td>
-        <td>mretuma@gmail.com</td>
+        <td>{{$user->first_name}}</td>
+        <td>{{$user->middle_name}}</td>
+        <td>{{$user->last_name}}</td>
+        <td>{{$user->address}}</td>
+        <td>{{ $user->gender->gender }}</td>
+        <td>{{$user->email_address}}</td>
         <td>
-        <a href="/user/edit" class="btn btn-primary">Update</a>
-        <a href="/user/delete" class="btn btn-danger">Delete</a>
+          <a href="/user/show/{{$user->user_id}}" class="btn btn-primary">View</a>
+          <a href="/user/edit/{{$user->user_id}}" class="btn btn-warning">Update</a>
+          <a href="/user/delete/{{$user->user_id}}" class="btn btn-danger">Delete</a>
         </td>
       </tr>
+      @endforeach
     </tbody>
   </table>
 

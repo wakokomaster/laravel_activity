@@ -33,5 +33,13 @@ Route::controller(GenderController::class)->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/user/create','create');
-    
+    Route::get('/user','index');
+    Route::get('/user/show/{id}','show');
+    Route::get('/user/edit/{id}','edit');
+    Route::get('/user/delete/{id}','delete');
+
+
+    Route::post('/user/store','store');
+    Route::put('/user/update/{user}','update');
+    Route::delete('/user/destroy/{user}','destroy');
 });
