@@ -13,7 +13,7 @@
 </style>
 
 <div class='container'>
-    <h2 class="title">Add User</h2>
+    <h2 class="title">Update User</h2>
     <form class="row g-4" action="/user/update/{{$user->user_id}}" method="POST">
         @method('PUT')
         @csrf
@@ -84,7 +84,7 @@
         {{-- Buttons --}}
         <div class="col-12">
             <a href="/user" class="btn btn-danger">Back</a>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Update</button>
         </div>
     </form>
 </div>

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('address', 55);
             $table->string('contact_num', 55);
             $table->string('email_address', 55);
-            $table->string('username', 55);
+            $table->string('username', 55)->unique();
             $table->string('password', 255);
             $table->timestamps();
 
