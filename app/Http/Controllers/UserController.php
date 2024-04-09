@@ -13,9 +13,16 @@ class UserController extends Controller
     public function index()
     {
         $search = request()->get('search');
-
-        if (!isset($search)) {
+        if (!$search) {
             $users = User::paginate(10);
+
+            return view('user.index', compact('users'));
+        }
+
+        $searchedGender = Gender::where('gender', $search)->first();
+        if ($searchedGender) {
+            $users = User::where('gender_id', $searchedGender['gender_id'])
+                ->paginate(10);
 
             return view('user.index', compact('users'));
         }
