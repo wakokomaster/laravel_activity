@@ -1,4 +1,4 @@
-@extends('layout.main')
+extends('layout.main')
 @extends('layout.nav')
 <title>Add Gender</title>
 @section('content')
@@ -11,7 +11,7 @@
 <div class='container'>
     <form class="row g-4" action="/gender/store" method="POST">
         <h1>
-        Add Gender
+            Add Gender
         </h1>
         @csrf
         <div class="row-md">
@@ -24,7 +24,7 @@
             <a href="/gender" class="btn btn-danger">Back</a>
             <button type="submit" class="btn btn-primary">Create</button>
         </div>
-        
+
     </form>
 </div>
 @endsection

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gender;
-use Dotenv\Repository\Adapter\PutenvAdapter;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class GenderController extends Controller
@@ -14,15 +12,18 @@ class GenderController extends Controller
         $genders = Gender::all();
         return view('gender.index', compact('genders'));
     }
+
     public function show($id)
     {
         $genders = Gender::find($id);
         return view('gender.show', compact('genders'));
     }
+
     public function create()
     {
         return view('gender.create');
     }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -58,7 +59,7 @@ class GenderController extends Controller
     }
     public function destroy(Request $request, Gender $gender)
     {
-     $gender->delete($request);
-     return redirect('gender')->with('message_success','Gender Deleted Successfully!');
+        $gender->delete($request);
+        return redirect('gender')->with('message_success', 'Gender Deleted Successfully!');
     }
 }
