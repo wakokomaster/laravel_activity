@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Hash;
+
 use App\Models\Gender;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +12,21 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $search = request()->get('search');
+
+        if (!isset($search)) {
+            $users = User::paginate(10);
+
+            return view('user.index', compact('users'));
+        }
+
+        $users = User::where('first_name', 'LIKE', "%$search%")
+            ->orWhere('last_name', 'LIKE', "%$search%")
+            ->orWhere('middle_name', 'LIKE', "%$search%")
+            ->paginate(10);
+
+        // NOTE: As of laravel 7, ->appends() can be substitued with a ->withQueryString call before ->links()
+        // ->appends(['search' => $search]);
 
         return view('user.index', compact('users'));
     }
@@ -33,62 +47,49 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'first_name' => ['required'],
-        //     'middle_name'=> '',
-        //     'last_name'=> ['required'],
-        //     'suffix_name'=> '',
-        //     'gender_id'=> ['required'],
-        //     'birth_date'=>['required'],
-        //     'address'=>['required'],
-        //     'contact_num'=>['required'],
-        //     'email_address'=>['required','unique:users','email'],
-        //     'username'=>['required','unique:users'],
-        //     'password'=>['required','same:confirm_password'],
-        // ]);
         $validator = Validator::make($request->all(), [
             'first_name' => ['required'],
-            'middle_name'=> '',
-            'last_name'=> ['required'],
-            'suffix_name'=> '',
-            'gender_id'=> ['required'],
-            'birth_date'=>['required'],
-            'address'=>['required'],
-            'contact_num'=>['required'],
-            'email_address'=>['required','unique:users','email'],
-            'username'=>['required','unique:users'],
-            'password'=>['required','same:confirm_password'],
+            'middle_name' => '',
+            'last_name' => ['required'],
+            'suffix_name' => '',
+            'gender_id' => ['required'],
+            'birth_date' => ['required'],
+            'address' => ['required'],
+            'contact_num' => ['required'],
+            'email_address' => ['required', 'unique:users', 'email'],
+            'username' => ['required', 'unique:users'],
+            'password' => ['required', 'same:confirm_password'],
         ]);
 
-        $validated = $validator->validate(); 
+        $validated = $validator->validate();
 
-        $validated['password'] = Hash::make($validated['password']);
+        $validated['password'] = password_hash($validated['password'], PASSWORD_BCRYPT);
         User::create($validated);
 
-        return redirect('user')->with('message_success','User Created Successfully!');
+        return redirect('/home')->with('message_success', 'User Created Successfully!');
     }
 
     public function edit($id)
     {
         $user = User::find($id);
         $genders = Gender::all();
-        return view('user.edit', compact('genders','user'));
+        return view('user.edit', compact('genders', 'user'));
     }
 
     public function update(Request $request, User $user)
     {
         $validator = Validator::make($request->all(), [
             'first_name' => ['required'],
-            'middle_name'=> '',
-            'last_name'=> ['required'],
-            'suffix_name'=> '',
-            'gender_id'=> ['required'],
-            'birth_date'=>['required'],
-            'address'=>['required'],
-            'contact_num'=>['required'],
+            'middle_name' => '',
+            'last_name' => ['required'],
+            'suffix_name' => '',
+            'gender_id' => ['required'],
+            'birth_date' => ['required'],
+            'address' => ['required'],
+            'contact_num' => ['required'],
             'email_address' => [
                 'required',
-                'email', 
+                'email',
                 Rule::unique('users')->ignore($user),
             ],
             'username' => [
@@ -97,20 +98,67 @@ class UserController extends Controller
             ],
         ]);
 
-        $validated = $validator->validate(); 
+        $validated = $validator->validate();
         $user->update($validated);
-        return redirect('user')->with('message_success', 'User Successfully Updated!');
+        return redirect('/home')->with('message_success', 'User Successfully Updated!');
     }
 
     public function delete($id)
     {
         $user = User::find($id);
 
-        return view('user.delete', compact('user'));   
+        return view('user.delete', compact('user'));
     }
-    public function destroy(Request $request, User $user)
+
+    public function destroy(User $user)
     {
         $user->delete();
-        return redirect('user')->with('message_success','User Deleted Successfully!');
+        return redirect('/home')->with('message_success', 'User Deleted Successfully!');
+    }
+
+    public function login()
+    {
+        return view('login.index');
+    }
+
+    public function loginAuth(Request $request)
+    {
+        $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        $potentialUser = User::where('username', $request->input('username'))
+            ->first();
+
+        if (!$potentialUser) {
+            return redirect()->to('/login')
+                ->withErrors(['username' => 'Wrong username or password']);
+        }
+
+        if (!password_verify($request->input('password'), $potentialUser['password'])) {
+            return redirect()->to('/login')
+                ->withErrors(['username' => 'Wrong username or password']);
+        }
+
+        // NOTE: Investigate the functionality of auth()->attempt()
+        // auth()->attempt([
+        //     'username' => $request->input('username'),
+        //     'password' => $request->input('password'),
+        // ]);
+
+        auth()->login($potentialUser);
+        request()->session()->regenerate();
+
+        return redirect()->to('/home');
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->to('/login');
     }
 }
