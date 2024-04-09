@@ -1,5 +1,5 @@
-extends('layout.main')
-@extends('layout.nav')
+@extends('layout.main')
+
 <title>Add Gender</title>
 @section('content')
 <style>
