@@ -3,9 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
@@ -29,12 +26,12 @@ class UserFactory extends Factory
             "last_name" => fake()->lastName(),
             "suffix_name" => fake()->suffix(),
             "birth_date" => fake()->date(),
-            "gender_id" => fake()->numberBetween($min = 1, $max  = 2),
+            "gender_id" => fake()->numberBetween(1, 2),
             "address" => fake()->streetAddress(),
             "contact_num" => fake()->phoneNumber(),
             "email_address" => fake()->safeEmail(),
             "username" => fake()->userName(),
-            "password" => static::$password ??= Hash::make('password')
+            "password" => password_hash('password', PASSWORD_BCRYPT),
         ];
     }
 
