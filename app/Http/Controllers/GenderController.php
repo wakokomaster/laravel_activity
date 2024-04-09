@@ -57,6 +57,7 @@ class GenderController extends Controller
         $gender = Gender::find($id);
         return view('gender.delete', compact('gender'));
     }
+
     public function destroy(Request $request, Gender $gender)
     {
         $gender->delete($request);
