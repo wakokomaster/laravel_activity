@@ -27,7 +27,7 @@ class GenderController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'gender' => ['required'],
+            'gender' => ['required', 'unique:genders'],
         ]);
 
         Gender::create($validated);
