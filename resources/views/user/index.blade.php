@@ -15,6 +15,12 @@
         padding-left: 3%;
         padding-right: 3%;
     }
+
+    .image-fluid {
+        aspect-ratio: 1;
+        border-radius: 500px;
+        max-width: 100px
+    }
 </style>
 
 
@@ -35,6 +41,7 @@
         </div>
         <thead>
             <tr>
+                <th scope="col">User Profile</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Middle Name</th>
                 <th scope="col">Last Name</th>
@@ -47,6 +54,7 @@
         <tbody>
             @foreach ($users as $user)
             <tr>
+                <td><img class="image-fluid" src="{{ $user->user_image ? asset('storage/img/user/' . $user->user_image) : 'https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg' }}" alt=""></td>
                 <td>{{$user->first_name}}</td>
                 <td>{{$user->middle_name}}</td>
                 <td>{{$user->last_name}}</td>

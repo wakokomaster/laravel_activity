@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\File;
 
 class UserController extends Controller
 {
@@ -103,9 +105,27 @@ class UserController extends Controller
                 'required',
                 Rule::unique('users')->ignore($user),
             ],
+            'user_image' => [
+                'nullable', File::image(), 'max:16000'
+            ]
         ]);
 
         $validated = $validator->validate();
+
+        if($request->hasFile('user_image')) {   
+            $filenameWithExtention = $request->file('user_image');
+
+            $filename = pathinfo($filenameWithExtention, PATHINFO_FILENAME);    
+
+            $extension = $request->file('user_image')->getClientOriginalExtension();
+
+            $filenameToStore = $filename .'_'. time() . '.' . $extension;
+
+            $request ->file('user_image')->storeAs('public/img/user',$filenameToStore);
+
+            $validated['user_image'] = $filenameToStore;
+        }
+
         $user->update($validated);
         return redirect('/home')->with('message_success', 'User Successfully Updated!');
     }
@@ -119,6 +139,10 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if ($user->user_image && Storage::exists('public/img/user/' . $user->user_image)) {
+            Storage::delete('public/img/user/' . $user->user_image);
+        }
+
         $user->delete();
         return redirect('/home')->with('message_success', 'User Deleted Successfully!');
     }

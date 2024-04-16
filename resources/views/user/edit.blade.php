@@ -14,7 +14,7 @@
 
 <div class='container'>
     <h2 class="title">Update User</h2>
-    <form class="row g-4" action="/user/update/{{$user->user_id}}" method="POST">
+    <form class="row g-4" action="/user/update/{{$user->user_id}}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         {{-- First Name --}}
@@ -79,6 +79,13 @@
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username" value="{{$user->username}}">
             @error ('username')<p class="text-danger">{{$message}}</p>@enderror
+        </div>`
+
+        {{-- User Image --}}
+        <div class="col-md-">
+            <label for="user_image" class="form-label">User Image</label>
+            <input type="file" class="form-control" id="user_image" name="user_image">
+            @error ('user_image')<p class="text-danger">{{$message}}</p>@enderror
         </div>
 
         {{-- Buttons --}}
