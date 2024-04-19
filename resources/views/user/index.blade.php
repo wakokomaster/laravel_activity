@@ -6,6 +6,7 @@
 <style>
     .container {
         padding-top: 2%;
+        /* padding-right: 10%; */
         border: 1px solid grey;
         border-radius: 5px;
         margin-top: 2%;
@@ -17,9 +18,10 @@
     }
 
     .image-fluid {
+        margin: 10px;
         aspect-ratio: 1;
         border-radius: 500px;
-        max-width: 100px
+        max-width: 100px;
     }
 </style>
 
@@ -41,14 +43,14 @@
         </div>
         <thead>
             <tr>
-                <th scope="col">User Profile</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Middle Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Email Address</th>
-                <th scope="col">Action</th>
+                <th class="col">User Profile</th>
+                <th class="col">First Name</th>
+                <th class="col">Middle Name</th>
+                <th class="col">Last Name</th>
+                <th class="col">Address</th>
+                <th class="col">Gender</th>
+                <th class="col">Email Address</th>
+                <th class="col-2" style="margin: 10px" >Action</th>
             </tr>
         </thead>
         <tbody>
